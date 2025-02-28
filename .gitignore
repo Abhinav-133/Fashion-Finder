@@ -1,0 +1,9 @@
+# Ignore all model and dataset files
+**/product_images/
+**/processed_images/
+*.npy
+*.h5
+*.csv
+*.json
+*.pickle
+*.pkl
