@@ -5,13 +5,11 @@ import cv2
 from sklearn.metrics.pairwise import cosine_similarity
 from PIL import Image
 import os
-import time  # For loading animation
+import time  
 
-# Load trained model
 model = tf.keras.models.load_model("../model/outfit_recommendation_model.h5")
 feature_extractor_model = tf.keras.Model(inputs=model.input, outputs=model.layers[-3].output)
 
-# Load dataset features & metadata
 dataset_features = np.load("../model/dataset_features.npy")
 image_paths = np.load("../model/image_paths.npy")
 dataset_categories = np.load("../model/dataset_categories.npy")
@@ -21,7 +19,6 @@ titles = np.load("../model/titles.npy", allow_pickle=True)
 prices = np.load("../model/prices.npy", allow_pickle=True)
 links = np.load("../model/links.npy", allow_pickle=True)
 
-# Function to preprocess user-uploaded image
 def preprocess_image(image):
     img = np.array(image)
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
@@ -30,7 +27,6 @@ def preprocess_image(image):
     img = np.expand_dims(img, axis=0) 
     return img
 
-# Outfit recommendation function
 def recommend_outfit(uploaded_image, top_n=5, sort_by="Similarity"):
     query_img = preprocess_image(uploaded_image)
     
@@ -60,10 +56,8 @@ def recommend_outfit(uploaded_image, top_n=5, sort_by="Similarity"):
     
     return recommendations
 
-# Streamlit UI
 st.set_page_config(page_title="Fashion Finder", page_icon="🛍️", layout="wide")
 
-# Custom CSS for better UI
 st.markdown(
     """
     <style>
@@ -161,7 +155,7 @@ if uploaded_file is not None:
     with col2:
         st.write("🔍 **Finding similar outfits...**")
         with st.spinner("✨ Processing... Please wait"):
-            time.sleep(2)  # Simulate loading time
+            time.sleep(2)  
             image = Image.open(uploaded_file)
             sort_option = st.selectbox("Sort By:", ["Price: Low to High", "Price: High to Low"])
             recommendations = recommend_outfit(image, top_n=5, sort_by=sort_option)
@@ -176,7 +170,7 @@ if uploaded_file is not None:
                 
                 with col_info:
                     st.markdown(f"<h4 style='color: #333;'>{rec['title']}</h4>", unsafe_allow_html=True)
-                    st.markdown(f"<p style='color: #e44d26; font-weight: bold;'>💰 ₹{rec['price']}</p>", unsafe_allow_html=True)
+                    st.markdown(f"<p style='color: #e44d26; font-weight: bold;'>$ {rec['price']}</p>", unsafe_allow_html=True)
                     st.markdown(f"<a href='{rec['link']}' class='buy-now-link'>🛒 Buy Now</a>", unsafe_allow_html=True)
         else:
             st.warning("⚠️ No matching outfits found.")
