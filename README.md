@@ -1,4 +1,4 @@
-# Outfit Recommendation System
+# Fashion-Finder
 
 The Outfit Recommendation System is an end-to-end application designed to assist users in discovering and refining their style. It uses web scraping to gather outfit data, extensive preprocessing to prepare images, a custom CNN model for outfit classification, OpenCV for image processing, and a recommendation engine to suggest complementary pieces.
 
