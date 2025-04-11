@@ -83,22 +83,6 @@ This project integrates multiple components to deliver a robust outfit recommend
     - **Explore Data:** Analyze model performance and processed data through the dashboard (if implemented).
 
 ---
-
-## Project Structure
-
-```plaintext
-outfit-recommendation-system/
-├── data/                  # Datasets, scraped images, and sample data
-├── models/                # Pre-trained model weights and architecture files
-├── src/                   # Source code for scraping, preprocessing, and modeling
-│   ├── scraper.py         # Web scraping scripts (using BeautifulSoup or Scrapy)
-│   ├── preprocess.py      # Image preprocessing using OpenCV and related libraries
-│   ├── model.py           # CNN model definition and training/inference routines
-│   ├── recommend.py       # Recommendation engine logic
-├── app.py                 # Main Streamlit application file
-├── requirements.txt       # Python dependencies list
-└── README.md              # This file
-```
 ## Dataset, Training, and Preprocessing
 
 - **Data Collection:**
